@@ -30,15 +30,36 @@
 
                     <div class="field-group">
                         <label>Област питања:</label>
-                        <select class="styled-select">
-                            <option>Основе безбедности саобраћаја</option>
+                        <select class="styled-select" id="areaSelect">
+                            <option>Uvod</option>
+                            <option>[NOVO] Kompletan kurs dizajna (Figma)</option>
+                            <option>Web dizajn za developere</option>
+                            <option>HTML & CSS - Osnove</option>
+                            <option>Obavezno pogledati</option>
+                            <option>Webflow Essentials</option>
+                            <option>Pravimo novi sajt [UPDATE v3]</option>
+                            <option>Webflow dinamički sadržaj (CMS)</option>
+                            <option>Webflow eCommerce</option>
+                            <option>Webflow paketi i client as editor</option>
+                            <option>Users / Logic / Apps / Client-first</option>
+                            <option>Izrada portfolio sajta</option>
+                            <option>Hosting i transfer sajta</option>
+                            <option>Freelance Business (non-UpWork)</option>
+                            <option>Kako dobiti klijente na UpWork-u</option>
+                            <option>Dodatni saveti</option>
+                            <option>* Bonus lekcije</option>
                         </select>
                     </div>
 
                     <div class="field-group">
                         <label>Подобласт питања:</label>
-                        <select class="styled-select">
-                            <option>Основне одредбе и основна начела безбедности саобраћаја на путевим</option>
+                        <select class="styled-select" id="subAreaSelect">
+                            <option>Šta ćete naučiti</option>
+                            <option>Proces izrade sajta</option>
+                            <option>Šta je Webflow, i zašto on</option>
+                            <option>Zašto učimo Figmu i dizajn</option>
+                            <option>Kako da pratite kurs</option>
+                            <option>Pristup diskord grupi</option>
                         </select>
                     </div>
                 </div>
@@ -54,21 +75,29 @@
                 <div class="selection-fields" id="numberFields">
                     <div class="field-group">
                         <label>Број питања:</label>
-                        <input type="text" class="styled-input" disabled>
+                        <input type="text" class="styled-input" placeholder="Унесите број питања">
                     </div>
                 </div>
             </div>
 
             <!-- Action Buttons -->
             <div class="button-container">
-                <button class="profile-btn" onclick="window.location.href='landing.html'">
-                    <i class="icon">👤</i> Профил кандидата
-                </button>
-                <button class="display-btn" onclick="window.location.href='index.html'">
-                    Приказ ➜
-                </button>
+                <div class="left-buttons">
+                    <button class="profile-btn" onclick="window.location.href='landing.html'">
+                        <i class="icon">👤</i> Профил кандидата
+                    </button>
+                </div>
+                <div class="right-buttons">
+                    <button class="exit-btn" onclick="window.location.href='landing.html'">
+                        Излаз
+                    </button>
+                    <button class="display-btn" onclick="window.location.href='index.html'">
+                        Приказ ➜
+                    </button>
+                </div>
             </div>
         </div>
     </div>
+    <script src="question-selection.js"></script>
 </body>
 </html> 
