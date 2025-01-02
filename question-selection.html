@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Избор Питања</title>
+    <link rel="stylesheet" href="question-selection.css">
+</head>
+<body>
+    <div class="container">
+        <div class="selection-container">
+            <h1>Изаберите начин приказа питања</h1>
+            
+            <!-- Question Area Selection -->
+            <div class="selection-group">
+                <div class="selection-option active">
+                    <input type="radio" id="byArea" name="displayType" checked>
+                    <label for="byArea">Приказ питања из подобласти</label>
+                </div>
+
+                <div class="selection-fields" id="areaFields">
+                    <div class="field-group">
+                        <label>Изаберите језик:</label>
+                        <select class="styled-select">
+                            <option>српски - ћирилица</option>
+                            <option>srpski - latinica</option>
+                            <option>english</option>
+                        </select>
+                    </div>
+
+                    <div class="field-group">
+                        <label>Област питања:</label>
+                        <select class="styled-select">
+                            <option>Основе безбедности саобраћаја</option>
+                        </select>
+                    </div>
+
+                    <div class="field-group">
+                        <label>Подобласт питања:</label>
+                        <select class="styled-select">
+                            <option>Основне одредбе и основна начела безбедности саобраћаја на путевим</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question Number Selection -->
+            <div class="selection-group">
+                <div class="selection-option">
+                    <input type="radio" id="byNumber" name="displayType">
+                    <label for="byNumber">Приказ питања по броју</label>
+                </div>
+
+                <div class="selection-fields" id="numberFields">
+                    <div class="field-group">
+                        <label>Број питања:</label>
+                        <input type="text" class="styled-input" disabled>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="button-container">
+                <button class="profile-btn" onclick="window.location.href='landing.html'">
+                    <i class="icon">👤</i> Профил кандидата
+                </button>
+                <button class="display-btn" onclick="window.location.href='index.html'">
+                    Приказ ➜
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 
