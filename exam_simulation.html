@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Симулација полагања</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Question Header -->
+        <div class="question-header">
+            <div class="question-number">Питање: <span id="currentQuestionNumber">1</span>/<span id="totalQuestions"></span></div>
+            <div class="current-question-points">Поена за питање: <span id="questionPoints"></span></div>
+            <div id="timer" style="font-size: 1.1em; color: #fff; margin-left: 1.5em;">Преостало време: <span id="time">00:00</span></div>
+            <button id="flagQuestion" class="flag-btn">Обележите питање</button>
+        </div>
+
+        <!-- Question Section -->
+        <div class="question-container">
+            <div class="question-id">ИД питања: <span id="questionIdDisplay"></span></div>
+            <div class="question-text">
+                <h2 id="questionText"></h2>
+            </div>
+            <div id="imageContainer" class="image-container"></div>
+            <div id="options" class="options-container"></div>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="navigation-container">
+            <button id="prevBtn" class="nav-btn">⬅ Претходно питање</button>
+            <button id="nextBtn" class="nav-btn">Следеће питање ➡</button>
+            <button id="end-exam" class="exit-btn">Заврши испит</button>
+        </div>
+    </div>
+    <!-- Summary Section (initially hidden) - izvan .container -->
+    <div id="summary" class="summary hidden">
+        <div class="summary-content-wrapper">
+            <h2>Резултати симулације</h2>
+            <div id="pass-fail-message" style="font-size: 1.5em; font-weight: bold; margin-bottom: 20px;"></div>
+            <div id="summaryContent">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Питање</th>
+                            <th>ИД</th>
+                            <th>Број поена</th>
+                            <th>Одговорено</th>
+                            <th>Обележено</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Summary rows will be inserted here by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+            <p>Број тачних одговора: <span id="correct-answers-count">0</span></p>
+            <p>Број нетачних одговора: <span id="incorrect-answers-count">0</span></p>
+            <p>Број неодговорених питања: <span id="unanswered-questions-count">0</span></p>
+            <button id="backToQuizBtn" class="summary-back-btn">⬅ Назад</button>
+            <button id="return-home" class="exit-btn">Повратак на почетну</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <script src="exam_simulation.js"></script>
+</body>
+</html> 

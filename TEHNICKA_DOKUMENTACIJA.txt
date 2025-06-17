@@ -1,0 +1,346 @@
+================================================================================
+                    TEHNIČKA DOKUMENTACIJA - WEBAPLIKACIJA ZA ISPITNE SIMULACIJE
+================================================================================
+
+DATUM KREIRANJA: 17. Jun 2025.
+VERZIJA: 1.8
+AUTOR: Luka Kolaković IV2
+DOPRINELI PROJEKTU: Nikola Lazarević, Darko Đukić, David Stanojević IV2
+OPIS: Web aplikacija za teorijske IT ispite sa kвизовима и симулацијом испита
+
+================================================================================
+                                 SADRŽAJ
+================================================================================
+
+1. OPŠTI PREGLED PROJEKTA
+2. STRUKTURA FAJLOVA
+3. ARHITEKTURA APLIKACIJE
+4. BAZA PITANJA - STRUKTURA I UPRAVLJANJE
+5. FUNKCIONALNOSTI PO STRANICAMA
+6. KAKO DODATI/MENJATI PITANJA
+7. KAKO MENJATI DISTRIBUCIJU PITANJA U SIMULACIJI
+8. KAKO MENJATI KRITERIJUME ZA OCENU
+9. TEHNIČKI DETALJI
+10. ODRŽAVANJE I NADOGRADNJA
+
+================================================================================
+                           1. OPŠTI PREGLED PROJEKTA
+================================================================================
+
+APLIKACIJA: Web aplikacija za pripremu teorijskih IT ispita
+JEZIK: HTML, CSS, JavaScript (vanilla)
+BAZA PODATAKA: JSON fajl (src/data/questionData.js)
+RESPONSIVE: Da, prilagođena za desktop i mobilne uređaje
+
+GLAVNE FUNKCIONALNOSTI:
+- Vežbanje po oblastima (teorija)
+- Simulacija ispita (50 pitanja, 2 sata)
+- Bodovanje i ocenjivanje
+- Izveštaji i analiza rezultata
+
+================================================================================
+                           2. STRUKTURA FAJLOVA
+================================================================================
+
+ROOT DIREKTORIJUM:
+├── landing.html              # Početna stranica sa navigacijom
+├── landing.css               # Stilovi za početnu stranicu
+├── question-selection.html   # Izbor oblasti za vežbanje
+├── question-selection.css    # Stilovi za izbor oblasti
+├── question-selection.js     # Logika za izbor oblasti
+├── exam_simulation.html      # Simulacija ispita
+├── exam_simulation.js        # Logika simulacije ispita
+├── index.html               # Stranica za vežbanje (teorija)
+├── script.js                # Glavna logika aplikacije
+├── styles.css               # Glavni stilovi
+├── uputstvo.html            # Uputstvo za korisnike
+└── TEHNICKA_DOKUMENTACIJA.txt # Ova dokumentacija
+
+SRC DIREKTORIJUM:
+└── data/
+    └── questionData.js       # Baza pitanja u JSON formatu
+
+================================================================================
+                           3. ARHITEKTURA APLIКACIJE
+================================================================================
+
+APLIKACIJA KORISTI:
+- Vanilla JavaScript (bez framework-a)
+- JSON kao bazu podataka
+- CSS za stilizovanje
+- HTML za strukturu
+
+GLAVNE KOMPONENTE:
+1. LANDING PAGE (landing.html) - Navigacija i početna stranica
+2. QUESTION SELECTION (question-selection.html) - Izbor oblasti
+3. THEORY MODE (index.html) - Vežbanje po oblastima
+4. EXAM SIMULATION (exam_simulation.html) - Simulacija ispita
+5. INSTRUCTIONS (uputstvo.html) - Korisničko uputstvo
+
+NAVIGACIJA:
+- Sidebar na landing stranici
+- Dugmad za povratak na početnu na svim stranicama
+- Interna navigacija kroz pitanja
+
+================================================================================
+                    4. BAZA PITANJA - STRUKTURA I UPRAVLJANJE
+================================================================================
+
+LOKACIJA: src/data/questionData.js
+
+STRUKTURA PITANJA:
+```javascript
+{
+    id: 1,                    // Jedinstveni ID pitanja
+    question: "Tekst pitanja...", // HTML format podržan
+    options: ["A", "B", "C", "D"], // Niz opcija (opciono)
+    correctAnswer: 0,         // Indeks tačnog odgovora (0-3) ILI
+    correctAnswer: [0, 2],    // Niz indeksa za multiple choice ILI
+    correctAnswer: "odgovor", // String za fill-in pitanja
+    points: 2,                // Broj poena za pitanje
+    group: "ПРОГРАМИРАЊЕ – ПРОГРАМСКИ ЈЕЗИК C", // Oblast
+    type: "fill-in"           // Opciono, za fill-in pitanja
+}
+```
+
+TIPOVI PITANJA:
+1. SINGLE CHOICE: correctAnswer je broj (0-3)
+2. MULTIPLE CHOICE: correctAnswer je niz brojeva [0, 2]
+3. FILL-IN: correctAnswer je string, type: "fill-in"
+
+OBLASTI (GROUPS):
+- "ПРОГРАМИРАЊЕ – ПРОГРАМСКИ ЈЕЗИК C"
+- "ПРОГРАМИРАЊЕ – ПРОГРАМСКИ ЈЕЗИК C#"
+- "ВЕБ ДИЗАЈН"
+- "ВЕБ ПРОГРАМИРАЊЕ"
+- "БАЗЕ ПОДАТАКА"
+
+KAKO DODATI NOVO PITANJE:
+1. Otvori src/data/questionData.js
+2. Dodaj novi objekat na kraj niza
+3. Dodeli jedinstveni ID
+4. Popuni sva polja prema strukturi
+5. Sačuvaj fajl
+
+PRIMER NOVOG PITANJA:
+```javascript
+{
+    id: 999,
+    question: "Šta je HTML?",
+    options: [
+        "Programski jezik",
+        "Markup jezik",
+        "Baza podataka",
+        "Operativni sistem"
+    ],
+    correctAnswer: 1,
+    points: 2,
+    group: "ВЕБ ДИЗАЈН"
+}
+```
+
+================================================================================
+                       5. FUNKCIONALNOSTI PO STRANICAMA
+================================================================================
+
+LANDING.HTML:
+- Navigacija kroz sidebar
+- Countdown timer do ispita
+- Linkovi ka svim stranicama
+
+QUESTION-SELECTION.HTML:
+- Prikaz svih dostupnih oblasti
+- Broj pitanja po oblasti
+- Navigacija ka teoriji
+
+INDEX.HTML (TEORIJA):
+- Prikaz pitanja jedan po jedan
+- Navigacija kroz pitanja
+- Čuvanje odgovora
+- Prikaz tačnih odgovora
+- Izveštaj sa rezultatima
+
+EXAM_SIMULATION.HTML:
+- Simulacija ispita sa 50 pitanja
+- Timer (2 sata)
+- Distribucija pitanja po oblastima
+- Čuvanje odgovora
+- Detaljni izveštaj sa ocenom
+
+UPUTSTVO.HTML:
+- Korisničko uputstvo
+- Objašnjenje funkcionalnosti
+- Kriterijumi za ocenu
+
+================================================================================
+                       6. KAKO DODATI/MENJATI PITANJA
+================================================================================
+
+DODAVANJE NOVOG PITANJA:
+1. Otvori src/data/questionData.js
+2. Pronađi niz pitanja (obično na kraju fajla)
+3. Dodaj novi objekat:
+   ```javascript
+   {
+       id: [sledeći slobodan ID],
+       question: "Tekst pitanja",
+       options: ["A", "B", "C", "D"],
+       correctAnswer: [indeks ili niz],
+       points: [broj poena],
+       group: "[oblast]"
+   }
+   ```
+
+MENJANJE POSTOJEĆEG PITANJA:
+1. Pronađi pitanje po ID-u
+2. Menjaj polja koja želiš
+3. Sačuvaj fajl
+
+BRISANJE PITANJA:
+1. Pronađi pitanje po ID-u
+2. Obriši ceo objekat
+3. Sačuvaj fajl
+
+NAPOMENE:
+- ID mora biti jedinstven
+- Grupa mora odgovarati postojećim oblastima
+- HTML je podržan u polju question
+- Opcije su opcione za fill-in pitanja
+
+================================================================================
+                   7. KAKO MENJATI DISTRIBUCIJU PITANJA U SIMULACIJI
+================================================================================
+
+LOKACIJA: exam_simulation.js, funkcija startExam()
+
+TRENUTNA DISTRIBUCIJA:
+```javascript
+const distribution = {
+    'ПРОГРАМИРАЊЕ – ПРОГРАМСКИ ЈЕЗИК C': 17,    // 34%
+    'ПРОГРАМИРАЊЕ – ПРОГРАМСКИ ЈЕЗИК C#': 11,   // 22%
+    'ВЕБ ДИЗАЈН': 6,                            // 12%
+    'ВЕБ ПРОГРАМИРАЊЕ': 5,                      // 10%
+    'БАЗЕ ПОДАТАКА': 11                         // 22%
+};
+```
+
+KAKO MENJATI:
+1. Otvori exam_simulation.js
+2. Pronađi objekat distribution
+3. Menjaj brojeve prema potrebi
+4. Ukupan broj mora biti 50
+5. Sačuvaj fajl
+
+PRIMER NOVE DISTRIBUCIJE:
+```javascript
+const distribution = {
+    'ПРОГРАМИРАЊЕ – ПРОГРАМСКИ ЈЕЗИК C': 20,    // 40%
+    'ПРОГРАМИРАЊЕ – ПРОГРАМСКИ ЈЕЗИК C#': 10,   // 20%
+    'ВЕБ ДИЗАЈН': 8,                            // 16%
+    'ВЕБ ПРОГРАМИРАЊЕ': 6,                      // 12%
+    'БАЗЕ ПОДАТАКА': 6                          // 12%
+};
+```
+
+================================================================================
+                       8. KAKO MENJATI KRITERIJUME ZA OCENU
+================================================================================
+
+LOKACIJA: exam_simulation.js, funkcija showSummary()
+
+TRENUTNI KRITERIJUMI:
+- do 50%: недовољан (1)
+- 50,5 – 63%: довољан (2)
+- 63,5 – 75%: добар (3)
+- 75,5 – 87%: врло добар (4)
+- 87,5 – 100%: одличан (5)
+
+KAKO MENJATI:
+1. Otvori exam_simulation.js
+2. Pronađi funkciju showSummary()
+3. Pronađi deo sa if-else granama za ocenu
+4. Menjaj granice prema potrebi
+5. Sačuvaj fajl
+
+PRIMER NOVIH KRITERIJUMA:
+```javascript
+if (percentage < 60) {
+    gradeText = "недовољан (1)";
+    gradeColor = "#f44336";
+} else if (percentage < 70) {
+    gradeText = "довољан (2)";
+    gradeColor = "#ff9800";
+} else if (percentage < 80) {
+    gradeText = "добар (3)";
+    gradeColor = "#ffc107";
+} else if (percentage < 90) {
+    gradeText = "врло добар (4)";
+    gradeColor = "#4caf50";
+} else {
+    gradeText = "одличан (5)";
+    gradeColor = "#2196f3";
+}
+```
+
+================================================================================
+                           9. TEHNIČKI DETALJI
+================================================================================
+
+ČUVANJE ODGOVORA:
+- Korisnički odgovori se čuvaju u memoriji (userAnswers objekat)
+- Čuvaju se odmah nakon izbora opcije
+- Sačuvaju se i kod navigacije kroz pitanja
+- Prikazuju se pri povratku na pitanje
+
+TIMER FUNKCIONALNOST:
+- Implementiran u exam_simulation.js
+- Koristi setInterval za ažuriranje
+- Automatski završava ispit kada istekne vreme
+- Prikazuje preostalo vreme u formatu HH:MM:SS
+
+VALIDACIJA ODGOVORA:
+- Single choice: tačan ako je izabran tačan indeks
+- Multiple choice: tačan ako su izabrani svi tačni i nijedan netačan
+- Fill-in: tačan ako se poklapa sa correctAnswer stringom
+
+IZVEŠTAJI:
+- Prikazuju broj tačnih, netačnih, neodgovorenih pitanja
+- Tabela sa statusom svakog pitanja
+- Procenat uspešnosti i ocena
+- ID pitanja za lakše pronalaženje
+
+================================================================================
+                       10. ODRŽAVANJE I NADOGRADNJA
+================================================================================
+
+REDOVNO ODRŽAVANJE:
+1. Proveravaj da li sva pitanja imaju tačne ID-eve
+2. Proveravaj da li su sve grupe ispravno napisane
+3. Testiraj funkcionalnost nakon dodavanja novih pitanja
+4. Proveravaj da li timer radi ispravno
+
+MOGUĆE NADOGRADNJE:
+1. Dodavanje novih tipova pitanja
+2. Implementacija baze podataka (MySQL, MongoDB)
+3. Dodavanje korisničkih naloga
+4. Dodavanje statistike i analitike
+5. Implementacija admin panela
+6. Dodavanje export funkcionalnosti (PDF izveštaji)
+
+BACKUP STRATEGIJA:
+1. Redovno backup-uj src/data/questionData.js
+2. Čuvaj verzije pre većih izmena
+3. Testiraj na kopiji pre primene na produkciju
+
+TROUBLESHOOTING:
+- Ako se pitanja ne prikazuju: proveri JSON sintaksu
+- Ako timer ne radi: proveri JavaScript konzolu za greške
+- Ako se odgovori ne čuvaju: proveri userAnswers objekat
+- Ako se stilovi ne primenjuju: proveri putanje do CSS fajlova
+
+================================================================================
+                                KRAJ DOKUMENTACIJE
+================================================================================
+
+Za dodatna pitanja ili podršku, obratite se administratoru sistema.
+Dokumentacija je ažurirana: 17. Juna 2025.
